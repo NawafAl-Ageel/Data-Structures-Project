@@ -30,6 +30,9 @@ public class LindkedList {
 		 Previous =null;
 		//compare to is to add the Contact in the Right place so When ((When Str.compareTo(str1) is negative this means that we have to add before it 
 		while(current!=null&&current.data.compareTo(newCon)<0) {
+			if(current.data.compareTo(newCon)==0||current.data.getPhoneNumber().equals(newCon.getPhoneNumber())) {
+				System.out.println("the name is Already exist !");
+			}
 			 Previous=current;
 			 current=current.next;
 		}
