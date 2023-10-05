@@ -45,6 +45,17 @@ public class LindkedList {
              Previous.next = newNode;
          }
 	}
+
+	
+	
+	public boolean search(String name) {
+		Node tmp = head;
+		while(tmp.next!=null) {
+			if(tmp.data.getName().equalsIgnoreCase(name))
+				return true;
+			tmp=tmp.next;}
+		return false;
+	}
 	
 	
 	
