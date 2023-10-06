@@ -32,6 +32,7 @@ public class LindkedList {
 		while(current!=null&&current.data.compareTo(newCon)<0) {
 			if(current.data.compareTo(newCon)==0||current.data.getPhoneNumber().equals(newCon.getPhoneNumber())) {
 				System.out.println("the name is Already exist !");
+				return;
 			}
 			 Previous=current;
 			 current=current.next;
