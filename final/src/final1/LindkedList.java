@@ -1,6 +1,6 @@
 package final1;
 //Every thing here is not official it's just for clarification 
-public class LindkedList {
+public class LinkedList {
 
 	// i made current and previous to make it easier to me for implementing add contact
 	private Node head;
