@@ -2,15 +2,14 @@ package final1;
 
 public class NodeE {
 	
-	public class Node {
 		
 		public Event data;
-		public Node next;
+		public NodeE next;
 		
 		
 		
 		
-		public Node() {
+		public NodeE() {
 			data=null;
 			next=null;
 		}
@@ -18,13 +17,10 @@ public class NodeE {
 
 
 
-		public Node(Event data) {
+		public NodeE(Event data) {
 			next=null;
 			this.data = data;
 		}
 		
 		
-
-	}
-
 }
