@@ -27,7 +27,7 @@ public class Event implements Comparable<Event> {
 
         // Validate event date and time
         while (month > 12 || dayOfMonth > 31 || hour > 24 || minute > 60 || localTime.getYear() > year
-                || (localTime.getYear() == year && month < localTime.getDayOfMonth())) {
+                || (localTime.getYear() == year && month < localTime.getMonthValue())) {
 
             System.out.println("Sorry, invalid date or time.");
             System.out.print("Enter year: ");
