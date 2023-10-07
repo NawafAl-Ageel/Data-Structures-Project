@@ -3,12 +3,19 @@ package final1;
 public class Contact implements Comparable<Contact>{
 	
 	
+	
 	private String name;
     private String phoneNumber;
     private String emailAddress;
     private String address;
     private String birthday;
     private String notes;
+    
+    
+    
+    public NodeE current;
+    public NodeE head;
+    public NodeE prevoius;
     
  // Constructor
     public Contact(String name, String phoneNumber, String emailAddress, String address, String birthday, String notes) {
@@ -19,7 +26,58 @@ public class Contact implements Comparable<Contact>{
         this.birthday = birthday;
         this.notes = notes;
     }
-
+    
+    private boolean isEmpty() {
+    	return head==null;
+    }
+    
+    
+    public boolean addEvent(Event newEvent) {
+    	
+		if(!periodConflict(newEvent)) {
+			NodeE newE =new NodeE(newEvent);
+			
+			
+			if(isEmpty()) {
+				head= newE;
+			}
+			else {
+			
+			current = head;
+			prevoius=null;
+			while(current!=null&&current.data.getTitle().compareTo(newE.data.getTitle())<0) {
+				prevoius=current;
+				current=current.next;
+			}
+			if (prevoius == null) {
+	             newE.next = head;
+	             head = newE;
+	         } else {
+	             newE.next = current;
+	             prevoius.next = newE;
+	         }
+			}
+			return true;
+		}
+		else {
+			return false;
+		}
+    }
+    
+    private boolean periodConflict(Event newEvent) {
+    	current=head;
+    	while(current!=null) {
+    		if(current.data.getYear()==newEvent.getYear()
+    				&&current.data.getMonth()==newEvent.getMonth()
+    				&&current.data.getDayOfMonth()==newEvent.getDayOfMonth()
+    				&&current.data.getHourOfDayIn24()==newEvent.getHourOfDayIn24()
+    				&&current.data.getMinute()==newEvent.getMinute())
+    		return true;
+    	}
+    	return false;
+    }
+    
+   
 	@Override
 	public int compareTo(Contact other) {
 		return this.name.compareTo(other.name);
