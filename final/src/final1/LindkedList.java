@@ -108,6 +108,42 @@ public class LinkedList {
             current = current.next;
         }
 
+	 private void printContactInfo(Contact con){
+    		System.out.println("Contact's Name: "+con.getName());
+    		System.out.println("Contact's Phone Number: "+con.getPhoneNumber());
+    		System.out.println("Contact's EmailAddress: "+con.getEmailAddress());
+    		System.out.println("Contact's Birthday: "+con.getBirthday());
+    		System.out.println("Contact's Address: "+con.getAddress());
+    		System.out.println("Contact's Notes: "+con.getNotes());   
+    		System.out.println();
+    	}
+
+	public void printContactsByFirstName(String firstName) {
+            current = head;
+
+            while (current != null) {
+                char[] ArrayOfName = firstName.toCharArray();
+                char[] ArrayOfCur = current.data.getName().toCharArray();
+                boolean flag = true;
+
+                // Compare the first name characters
+                for (int i = 0; i < ArrayOfName.length; i++) {
+                    if (i >= ArrayOfCur.length || ArrayOfCur[i] != ArrayOfName[i]) {
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if (flag && (ArrayOfCur.length == ArrayOfName.length || ArrayOfCur[ArrayOfName.length] == ' ')) {
+                    printContactInfo(current.data);
+                }
+
+                current = current.next;
+            }
+        }
+
+	
+
         // If the contact was not found.
         System.out.println("Contact not found: " + name);
     }
