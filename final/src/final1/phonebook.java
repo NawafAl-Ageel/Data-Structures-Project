@@ -152,6 +152,12 @@ public class Phonebook {
 			default: System.out.println("Wrong number choosed!");
 		}				
 	}
+
+	public void printContactsByFirstName() {
+		Scanner input = new Scanner(System.in);
+		String firstName = input.nextLine();	
+		contactsList.printContactsByFirstName(firstName);
+	}
 	
 	public void printAllEventsAlphanetically() {
 		for(Event event : eventsList) {
