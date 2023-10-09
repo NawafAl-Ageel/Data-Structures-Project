@@ -118,9 +118,45 @@ public class Phonebook {
 				break;
 		}
 	}
+
+	public void printEventDetails() {
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter search criteria: ");
+		System.out.println("1. Contact name: ");
+		System.out.println("2. Event title: ");
+
+		int choice = input.nextInt();
+		input.nextLine(); // to finish the line
+		
+		switch(choice) {
+		case 1:
+			System.out.println("Enter the contact's name: ");
+			String givenContactName = input.nextLine();
+			
+			for (Event event : eventsList) {
+				if(event.getContactName().equalsIgnoreCase(givenContactName)) {
+					event.printEvent();
+				}
+					
+			}
+			
+		case 2:
+			System.out.println("Enter the event title: ");
+			String givenTitle = input.nextLine();
+			for(Event event : eventsList) {
+				if(event.getTitle().equalsIgnoreCase(givenTitle))
+					event.printEvent();
+			}
+			break;
+			
+			default: System.out.println("Wrong number choosed!");
+		}				
+	}
 	
-	
-	
-	
+	public void printAllEventsAlphanetically() {
+		for(Event event : eventsList) {
+			event.printEvent();
+		}
+	}
 	
 }
