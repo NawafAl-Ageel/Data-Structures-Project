@@ -107,30 +107,6 @@ public class Phonebook {
 		switch(choice) {
 		case 1:
 			System.out.println("Enter the contact's name: ");
-			String giveContactName = input.nextLine();
-			while(eventsList.current!=null) {
-				//if(eventsList.current             there is a problem here)
-			}
-			
-		case 2:
-			
-			default:
-				break;
-		}
-	}
-
-	public void printEventDetails() {
-		Scanner input = new Scanner(System.in);
-		System.out.println("Enter search criteria: ");
-		System.out.println("1. Contact name: ");
-		System.out.println("2. Event title: ");
-
-		int choice = input.nextInt();
-		input.nextLine(); // to finish the line
-		
-		switch(choice) {
-		case 1:
-			System.out.println("Enter the contact's name: ");
 			String givenContactName = input.nextLine();
 			
 			for (Event event : eventsList) {
