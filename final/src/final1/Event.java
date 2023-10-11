@@ -1,119 +1,82 @@
-package final1;
+package lasttimeinshallah;
 
-import java.time.LocalDateTime;
-import java.util.Scanner;
+import java.time.*;
 
 public class Event implements Comparable<Event> {
-    Scanner input = new Scanner(System.in);
-    private String title;
-    private String location;
 
-    LocalDateTime localTime = LocalDateTime.now();
-    private LocalDateTime EventTime;
+	private String title;
+	private String location;
+	private String contactName;
+	private String eventDate;
 
-    // Linked list nodes
-    private static Node head;
-    private static Node current;
-    private static Node Previous;
+	private LocalDateTime EventTime;
+	
+	private Contact con;
 
-    // Constructor
-    public Event(String title, String contactName, int year, int month, int dayOfMonth, int hour, int minute, String location) {
+	// Constructor
+	public Event(String title, String contactName, int year, int month, int dayOfMonth, int hour, int minute,
+			String location) {
 
-        this.title = title;
-        this.location = location;
+		this.title = title;
+		this.location = location;
+		
+		Contact EventContact =LinkedList.searchByAnyTerm(contactName);
+		if(EventContact==null) {
+			System.out.println("The Contact doesn't exist !");
+			return;
+		}
+		else if(!EventContact.HasEvent()) {
+			System.out.println("The contact has already Scheduled an Event !");
+			return;
+		}
+		con = EventContact;
+		
 
-        // Add contact to the event
-        addContact(LindkedList.searchContactByName(contactName));
+		EventTime = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+	}
 
-        // Validate event date and time
-        while (month > 12 || dayOfMonth > 31 || hour > 24 || minute > 60 || localTime.getYear() > year
-                || (localTime.getYear() == year && month < localTime.getMonthValue())) {
+	public void printEvent() {
+		System.out.println("Event title: " + title);
+		System.out.println("Event is with the contact: " + con.getName());
+		System.out.println("Event date: " + getMonth()+"/"+getDay()+"/"+getYear()+" in Time : "+getHour()+":"+getMinute());
+		System.out.println("Event location: " + location);
+		System.out.println();
+	}
 
-            System.out.println("Sorry, invalid date or time.");
-            System.out.print("Enter year: ");
-            year = input.nextInt();
-            System.out.print("Enter month: ");
-            month = input.nextInt();
-            System.out.print("Enter dayOfMonth: ");
-            dayOfMonth = input.nextInt();
-            System.out.print("\nEnter hour: ");
-            hour = input.nextInt();
-            System.out.print("Enter minute: ");
-            minute = input.nextInt();
-        }
-        EventTime = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    // Add a contact to the event
-    public static void addContact(Contact newContactInEvent) {
-        Node newContact = new Node(newContactInEvent);
-        if (head == null) {
-            head = new Node(newContactInEvent);
-        } else {
-            current = head;
-            Previous = null;
-            while (current != null) {
-                if (current.data.getName().compareTo(newContact.data.getName()) == 0) {
-                    System.out.println("The contact is already in the Event!");
-                    return;
-                } else {
-                    Previous = current;
-                    current = current.next;
-                }
-            }
-            Previous.next = current.next;
-            current = current.next;
-        }
-    }
+	public String getLocation() {
+		return location;
+	}
 
-    // Print all contacts in this event
-    public static void PrintAllContactsInThisEvent() {
-        current = head;
-        while (current != null) {
-            System.out.println(current.data);
-            current = current.next;
-        }
-        System.out.println("All Contacts Have Been Printed!");
-    }
+	public String getContactName() {
+		return contactName;
+	}
 
-    // Print event details
-    public static void printEvent() {
-        
-    }
+	public int getYear() {
+		return EventTime.getYear();
+	}
 
-    // Delete the event
-    public static boolean deleteEvent() {
-        head = null;
-        return true;
-    }
+	public int getMonth() {
+		return EventTime.getMonthValue();
+	}
 
-    // Getters and Setters
-    public String getTitle() {
-        return title;
-    }
+	public int getDay() {
+		return EventTime.getDayOfMonth();
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public int getHour() {
+		return EventTime.getHour();
+	}
 
-    public String getLocation() {
-        return location;
-    }
+	public int getMinute() {
+		return EventTime.getMinute();
+	}
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public static void main(String[] args) {
-        LocalDateTime local = LocalDateTime.now();
-        LocalDateTime EventTime = LocalDateTime.of(1000, 9, 10, 10, 20);
-
-        System.out.println(local);
-        System.out.println(EventTime);
-    }
-
-	@Override
 	public int compareTo(Event o) {
 		return this.title.compareTo(o.title);
 	}
+
 }
