@@ -1,26 +1,20 @@
-package final1;
+package lasttimeinshallah;
 
-public class Node {
+public class Node<t> {
 	
-	public Contact data;
-	public Node next;
+	public t data;
+	public Node<t> next;
 	
-	
-	
-	
+
 	public Node() {
-		data=null;
-		next=null;
+		data =null;
+		next =null;
+		
 	}
-
-
-
-
-	public Node(Contact data) {
+	
+	public Node(t data) {
 		next=null;
 		this.data = data;
 	}
 	
-	
-
 }
