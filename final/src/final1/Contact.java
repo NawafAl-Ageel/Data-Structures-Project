@@ -1,23 +1,18 @@
-package final1;
+package lasttimeinshallah;
 
-public class Contact implements Comparable<Contact>{
-	
-	
-	
-	private String name;
+public class Contact implements Comparable<Contact> {
+
+    // Contact properties
+    private String name;
     private String phoneNumber;
     private String emailAddress;
     private String address;
     private String birthday;
     private String notes;
-    
-    
-    
-    public NodeE current;
-    public NodeE head;
-    public NodeE prevoius;
-    
- // Constructor
+
+    private Event event;
+
+    // Constructor
     public Contact(String name, String phoneNumber, String emailAddress, String address, String birthday, String notes) {
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -25,118 +20,76 @@ public class Contact implements Comparable<Contact>{
         this.address = address;
         this.birthday = birthday;
         this.notes = notes;
+        this.event = null; // Initialize event to null
     }
-    
-    private boolean isEmpty() {
-    	return head==null;
-    }
-    
-    
+
+    // Method to add an event to the contact
     public boolean addEvent(Event newEvent) {
-    	
-		if(!periodConflict(newEvent)) {
-			NodeE newE =new NodeE(newEvent);
-			
-			
-			if(isEmpty()) {
-				head= newE;
-			}
-			else {
-			
-			current = head;
-			prevoius=null;
-			while(current!=null&&current.data.getTitle().compareTo(newE.data.getTitle())<0) {
-				prevoius=current;
-				current=current.next;
-			}
-			if (prevoius == null) {
-	             newE.next = head;
-	             head = newE;
-	         } else {
-	             newE.next = current;
-	             prevoius.next = newE;
-	         }
-			}
-			return true;
-		}
-		else {
-			return false;
-		}
+        if (this.event == null) {
+            this.event = newEvent;
+            return true;
+        } else {
+            System.out.println("The contact already has an event.");
+            return false;
+        }
     }
-    
-    private boolean periodConflict(Event newEvent) {
-    	current=head;
-    	while(current!=null) {
-    		if(current.data.getYear()==newEvent.getYear()
-    				&&current.data.getMonth()==newEvent.getMonth()
-    				&&current.data.getDayOfMonth()==newEvent.getDayOfMonth()
-    				&&current.data.getHourOfDayIn24()==newEvent.getHourOfDayIn24()
-    				&&current.data.getMinute()==newEvent.getMinute())
-    		return true;
-    	}
-    	return false;
+
+    // Compare contacts based on their names
+    public int compareTo(Contact other) {
+        return this.name.compareTo(other.name);
     }
-    
-   
-	@Override
-	public int compareTo(Contact other) {
-		return this.name.compareTo(other.name);
-	}
 
-	public String getName() {
-		return name;
-	}
+    // Method to print contact information
+    public void printContactInfo() {
+        System.out.println();
+        System.out.println("Contact's Name: " + this.getName());
+        System.out.println("Contact's Phone Number: " + this.getPhoneNumber());
+        System.out.println("Contact's Email Address: " + this.getEmailAddress());
+        System.out.println("Contact's Birthday: " + this.getBirthday());
+        System.out.println("Contact's Address: " + this.getAddress());
+        System.out.println("Contact's Notes: " + this.getNotes());
+        System.out.println();
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    // Getters for contact properties
+    public String getName() {
+        return name;
+    }
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+    public Event getEvent() {
+        return event;
+    }
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-	public String getEmailAddress() {
-		return emailAddress;
-	}
+    public String getEmailAddress() {
+        return emailAddress;
+    }
 
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public String getBirthday() {
+        return birthday;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public String getNotes() {
+        return notes;
+    }
 
-	public String getBirthday() {
-		return birthday;
-	}
+	public boolean HasEvent() {
+    	return event==null;
+    }
 
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
-	}
-
-	public String getNotes() {
-		return notes;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-
-	@Override
-	public String toString() {
-		return "Contact [name=" + name + ", phoneNumber=" + phoneNumber + ", emailAddress=" + emailAddress
-				+ ", address=" + address + ", birthday=" + birthday + ", notes=" + notes + "]";
-	}
-	
+    @Override
+    public String toString() {
+        return "Contact [name=" + name + ", phoneNumber=" + phoneNumber + ", emailAddress=" + emailAddress
+                + ", address=" + address + ", birthday=" + birthday + ", notes=" + notes + "]";
+    }
+}
 	
 	
 	
