@@ -1,5 +1,4 @@
 package lasttimeinshallah;
-
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -59,13 +58,25 @@ public class Phonebook {
 			}
 
 		} while (givenPhoneNumber.length() != 10 || !isDigit);
+		String givenEmailAddress = null;
 
-		System.out.println("Enter Email Address: ");
-		String givenEmailAddress = input.nextLine();
+		do {
+			System.out.println("Enter Email Address: ");
+			givenEmailAddress = input.nextLine();
+			if(!givenEmailAddress.contains("@") || !givenEmailAddress.contains(".") || givenEmailAddress.length() < 7)
+				System.out.println("incorrect Email Adress Format!");
+		} while (!givenEmailAddress.contains("@") || !givenEmailAddress.contains(".") || givenEmailAddress.length() < 7);
 		System.out.println("Enter Address: ");
 		String givenAddress = input.nextLine();
-		System.out.println("Enter Birthday:(MM/DD/YYYY)");
-		String givenBirthday = input.nextLine();
+
+		String givenBirthday = null;
+		do {
+			System.out.println("Enter Birthday:(MM/DD/YYYY)");
+			givenBirthday = input.nextLine();
+			if (givenBirthday.length() < 10 || !givenBirthday.contains("/"))
+				System.out.println("Birthday must be with the format (MM/DD/YYYY)");
+		} while (givenBirthday.length() < 10 || !givenBirthday.contains("/"));
+
 		System.out.println("Enter notes: ");
 		String givenNotes = input.nextLine();
 		Contact contact = new Contact(givenName, givenPhoneNumber, givenEmailAddress, givenAddress, givenBirthday,
@@ -126,19 +137,6 @@ public class Phonebook {
 		input.nextLine();
 	}
 
-	public void deleteContact() {
-		input = new Scanner(System.in);
-		System.out.println("Enter the contact's name that you want to delete: ");
-		String deletingName = input.nextLine();
-
-		if (Linked.deleteContact(deletingName)) {
-			System.out.println("Contact has been deleted");
-		} else {
-			System.out.println("Contact was not found");
-		}
-	}
-
-	
 	private static int[] splitDateTime(String dateTimeStr) {
 		String[] parts = dateTimeStr.split(" ");
 		String[] dateParts = parts[0].split("/");
@@ -153,7 +151,18 @@ public class Phonebook {
 		return new int[] { year, month, day, hour, minutes };
 	}
 
-	
+	public void deleteContact() {
+		input = new Scanner(System.in);
+		System.out.println("Enter the contact's name that you want to delete: ");
+		String deletingName = input.nextLine();
+
+		if (Linked.deleteContact(deletingName)) {
+			System.out.println("Contact has been deleted");
+		} else {
+			System.out.println("Contact was not found");
+		}
+	}
+
 	public void scheduleEvent() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter event title: ");
@@ -177,8 +186,16 @@ public class Phonebook {
 		String eventDateAndTime = null;
 		do {
 			try {
-				System.out.println("Enter event date and time (MM/DD/YYYY HH:MM)");
-				eventDateAndTime = input.nextLine();
+				do {
+					System.out.println("Enter event date and time (MM/DD/YYYY HH:MM)");
+					eventDateAndTime = input.nextLine();
+
+					if (eventDateAndTime.length() < 16 || !eventDateAndTime.contains("/")
+							|| !eventDateAndTime.contains(":"))
+						System.out.println("Event date and time must be with the format (MM/DD/YY HH:MM)");
+				} while (eventDateAndTime.length() < 16 || !eventDateAndTime.contains("/")
+						|| !eventDateAndTime.contains(":"));
+
 				resultDateTime = splitDateTime(eventDateAndTime);
 				year = resultDateTime[0];
 				month = resultDateTime[1];
