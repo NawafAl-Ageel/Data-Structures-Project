@@ -17,7 +17,16 @@ public class LinkedList {
 	public boolean isEmptyE() {
 		return headE == null;
 	}
-
+	private boolean periodConflict(LocalDateTime newEventTime) {
+        	Node<Event> currentE = headE;
+        	while (currentE != null) {
+            		if (newEventTime.isEqual(currentE.data.getEventTime())) {
+                return true;
+            }
+            currentE = currentE.next;
+        }
+        return false;
+	}
 	public boolean addContact(Contact newCon) {
 		Node newNode = new Node(newCon);
 		// first case is to make sure if the List is empty or not
