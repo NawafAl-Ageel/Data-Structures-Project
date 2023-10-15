@@ -215,10 +215,13 @@ public class Phonebook {
 		String eventLocation = input.nextLine();
 
 		Event event = new Event(eventTitle, contactName, year, month, dayOfMonth, hour, minute, eventLocation);
-		scheduledContact.addEvent(event);
-		Linked.addEvent(event);
-		System.out.println("!Event have been Scheduled!");
-		System.out.println();
+		
+		if (Linked.addEvent(event)) {
+	        scheduledContact.addEvent(event);
+	        System.out.println("Event has been scheduled!");	    
+		} 
+		else
+	        System.out.println("There might be a conflict with another event at the same time");
 	}
 
 	public void printEventDetails() {
