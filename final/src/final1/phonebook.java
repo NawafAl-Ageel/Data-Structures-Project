@@ -156,126 +156,126 @@ public class Phonebook {
 		System.out.println("Enter the contact's name that you want to delete: ");//1
 		String deletingName = input.nextLine();//1
 
-		if (Linked.deleteContact(deletingName)) { //1
+		if (Linked.deleteContact(deletingName)) { //n
 			System.out.println("Contact has been deleted"); //1
-		} else { 
-			System.out.println("Contact was not found"); 
-		}
+		} else { //1
+			System.out.println("Contact was not found"); //1
+		} //1
 	}
 
 	public void scheduleEvent() {
-		Scanner input = new Scanner(System.in);
-		System.out.println("Enter event title: ");
-		String eventTitle = input.nextLine();
+		Scanner input = new Scanner(System.in); //1
+		System.out.println("Enter event title: "); //1
+		String eventTitle = input.nextLine(); //1
 
-		System.out.println("Enter contact name: ");
-		String contactName = input.nextLine();
+		System.out.println("Enter contact name: "); //1
+		String contactName = input.nextLine(); //1
 
-		Contact scheduledContact = Linked.searchByAnyTerm(contactName);
-		if (scheduledContact == null) {
-			System.out.println("Contact was not found");
-			return;
-		}
+		Contact scheduledContact = Linked.searchByAnyTerm(contactName); //1
+		if (scheduledContact == null) { //1
+			System.out.println("Contact was not found"); //1
+			return; //1
+		} //1
 
-		int resultDateTime[];
-		int year = 0;
-		int month = 0;
-		int dayOfMonth = 0;
-		int hour = 0;
-		int minute = 0;
-		String eventDateAndTime = null;
-		do {
-			try {
-				do {
-					System.out.println("Enter event date and time (MM/DD/YYYY HH:MM)");
-					eventDateAndTime = input.nextLine();
+		int resultDateTime[]; //1
+		int year = 0; //1
+		int month = 0; //1
+		int dayOfMonth = 0; //1
+		int hour = 0; //1
+		int minute = 0; //1
+		String eventDateAndTime = null; //1
+		do { //n+1
+			try { //n+1
+				do {  //n^2+2n+1
+					System.out.println("Enter event date and time (MM/DD/YYYY HH:MM)"); //n^2+2n+1
+					eventDateAndTime = input.nextLine();  //n^2+2n+1
 
-					if (eventDateAndTime.length() < 16 || !eventDateAndTime.contains("/")
-							|| !eventDateAndTime.contains(":"))
-						System.out.println("Event date and time must be with the format (MM/DD/YY HH:MM)");
+					if (eventDateAndTime.length() < 16 || !eventDateAndTime.contains("/")  
+							|| !eventDateAndTime.contains(":"))  //n^2+2n+1
+						System.out.println("Event date and time must be with the format (MM/DD/YY HH:MM)");  //n^2+2n+1
 				} while (eventDateAndTime.length() < 16 || !eventDateAndTime.contains("/")
-						|| !eventDateAndTime.contains(":"));
+						|| !eventDateAndTime.contains(":")); //n^2 +n
 
-				resultDateTime = splitDateTime(eventDateAndTime);
-				year = resultDateTime[0];
-				month = resultDateTime[1];
-				dayOfMonth = resultDateTime[2];
-				hour = resultDateTime[3];
-				minute = resultDateTime[4];
+				resultDateTime = splitDateTime(eventDateAndTime);  //n+1
+				year = resultDateTime[0];  //n+1
+				month = resultDateTime[1];  //n+1
+				dayOfMonth = resultDateTime[2];  //n+1
+				hour = resultDateTime[3];  //n+1
+				minute = resultDateTime[4];  //n+1
 
-			} catch (Exception e) {
-				System.out.println("Enter right value");
-				input.nextLine();
-			}
+			} catch (Exception e) {  //n+1
+				System.out.println("Enter right value");  //n+1
+				input.nextLine();  //n+1
+			}  //n+1
 
 		} while (month > 12 || dayOfMonth > 31 || hour > 24 || minute > 60 || eventDateAndTime.length() < 16
-				|| localTime.getYear() > year || (localTime.getYear() == year && month < localTime.getDayOfMonth()));
+				|| localTime.getYear() > year || (localTime.getYear() == year && month < localTime.getDayOfMonth())); //n
 
-		System.out.println("Enter event location: ");
-		String eventLocation = input.nextLine();
+		System.out.println("Enter event location: "); //1
+		String eventLocation = input.nextLine(); //1
 
-		Event event = new Event(eventTitle, contactName, year, month, dayOfMonth, hour, minute, eventLocation);
+		Event event = new Event(eventTitle, contactName, year, month, dayOfMonth, hour, minute, eventLocation); //1
 		
-		if (Linked.addEvent(event)) {
-	        scheduledContact.addEvent(event);
-	        System.out.println("Event has been scheduled!");	    
-		} 
-		else
-	        System.out.println("There might be a conflict with another event at the same time");
+		if (Linked.addEvent(event)) { //1
+	        scheduledContact.addEvent(event); //1
+	        System.out.println("Event has been scheduled!"); //1	    
+		} //1
+		else //1
+	        System.out.println("There might be a conflict with another event at the same time"); //1
+	} //1
+
+	public void printEventDetails() { 
+		input = new Scanner(System.in); //1
+		int choice = 0; //1
+
+		do { //n+1
+			System.out.println("Enter search criteria: ");  //n+1
+			System.out.println("1. Contact name: ");  //n+1
+			System.out.println("2. Event title: "); v
+
+			try {  //n+1
+				choice = input.nextInt();  //n+1
+
+			} catch (Exception e) {  //n+1
+				System.out.println("Enter the Right choice please !");  //n+1
+				input.nextLine();  //n+1
+			}  //n+1
+
+		} while (choice != 1 && choice != 2); //n
+
+		switch (choice) { //1
+		case 1: //1
+			System.out.println("Enter the contact's name: "); //1
+			String givenContactName = input.next(); //1
+			Contact ContactE = Linked.searchByAnyTerm(givenContactName); //1
+			if (ContactE != null && !ContactE.HasEvent()) { //1 
+				ContactE.getEvent().printEvent(); //1
+			} else { //1
+				System.out.println("Event or Contact not found !"); //1
+			} //1
+			break;  //1
+		case 2: //1
+			System.out.println("Enter the event title: "); //1
+			String givenTitle = input.next(); //1
+			Event Eventy = LinkedList.searchBytitle(givenTitle); //1
+			if (Eventy != null) { //1
+				Eventy.printEvent(); //1
+			} else { //1
+				System.out.println("No Event 've been found !"); //1
+			} //1
+			input.nextLine(); //1
+			break; //1
+		} //1
+
 	}
 
-	public void printEventDetails() {
-		input = new Scanner(System.in);
-		int choice = 0;
-
-		do {
-			System.out.println("Enter search criteria: ");
-			System.out.println("1. Contact name: ");
-			System.out.println("2. Event title: ");
-
-			try {
-				choice = input.nextInt();
-
-			} catch (Exception e) {
-				System.out.println("Enter the Right choice please !");
-				input.nextLine();
-			}
-
-		} while (choice != 1 && choice != 2);
-
-		switch (choice) {
-		case 1:
-			System.out.println("Enter the contact's name: ");
-			String givenContactName = input.next();
-			Contact ContactE = Linked.searchByAnyTerm(givenContactName);
-			if (ContactE != null && !ContactE.HasEvent()) {
-				ContactE.getEvent().printEvent();
-			} else {
-				System.out.println("Event or Contact not found !");
-			}
-			break;
-		case 2:
-			System.out.println("Enter the event title: ");
-			String givenTitle = input.next();
-			Event Eventy = LinkedList.searchBytitle(givenTitle);
-			if (Eventy != null) {
-				Eventy.printEvent();
-			} else {
-				System.out.println("No Event 've been found !");
-			}
-			input.nextLine();
-			break;
-		}
-
-	}
-
-	public void printContactsByFirstName() {
-		System.out.println("Enter the first name:");
-		input = new Scanner(System.in);
-		String firstName = input.nextLine();
-		Linked.printContactsByFirstName(firstName);
-		System.out.println("finished !");
-	}
+	public void printContactsByFirstName() { 
+		System.out.println("Enter the first name:"); //1
+		input = new Scanner(System.in); //1
+		String firstName = input.nextLine(); //1
+		Linked.printContactsByFirstName(firstName); //n
+		System.out.println("finished !"); //1
+	} 
 
 	public void printAllEventsAlphanetically() {
 		Linked.PrintAllEvents();
