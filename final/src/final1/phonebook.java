@@ -181,6 +181,11 @@ public class Phonebook {
 			return; //1
 		} //1
 
+		if(!scheduledContact.HasEvent()) {
+			System.out.println("Contact already has an event");
+			return;
+		}
+
 		int resultDateTime[]; //1
 		int year = 0; //1
 		int month = 0; //1
