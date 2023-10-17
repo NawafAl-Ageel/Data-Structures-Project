@@ -17,15 +17,15 @@ public class LinkedList {
 	public boolean isEmptyE() {
 		return headE == null;
 	}
-	private boolean periodConflict(LocalDateTime newEventTime) {
-        	Node<Event> currentE = headE;
-        	while (currentE != null) {
-            		if (newEventTime.isEqual(currentE.data.getEventTime())) {
-                return true;
+	private boolean periodConflict(LocalDateTime newEventTime) { 
+        	Node<Event> currentE = headE; //1
+        	while (currentE != null) { //n+1
+            		if (newEventTime.isEqual(currentE.data.getEventTime())) { //n
+                return true; //1
             }
-            currentE = currentE.next;
+            currentE = currentE.next; //n
         }
-        return false;
+        return false; //1
 	}
 	public boolean addContact(Contact newCon) {
 		Node newNode = new Node(newCon);
