@@ -57,9 +57,8 @@ public class Phonebook {
 				System.out.println("The Phone number must be a number!");  //n+1 
 			}  //n+1 
 
-			if (!isDigit) { //n+1
-				System.out.println("The Phone number must be a number!");
-			}
+			if(Linked.searchByAnyTerm(givenPhoneNumber)!=null)
+				System.out.println("The phone Number is already used in another contact");
 
 		} while (givenPhoneNumber.length() != 10 || !isDigit || (Linked.searchByAnyTerm(givenPhoneNumber)!=null)); //n
 		String givenEmailAddress = null; //1
