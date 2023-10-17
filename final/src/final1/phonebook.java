@@ -278,7 +278,7 @@ public class Phonebook {
 	} 
 
 	public void printAllEventsAlphanetically() {
-		Linked.PrintAllEvents();
+		Linked.PrintAllEvents(); //n+1
 	}
 
 	public void runPhoneBook() {
