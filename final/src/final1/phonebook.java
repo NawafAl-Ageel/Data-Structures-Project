@@ -171,7 +171,7 @@ public class Phonebook {
 		System.out.println("Enter contact name: "); //1
 		String contactName = input.nextLine(); //1
 
-		Contact scheduledContact = Linked.searchByAnyTerm(contactName); //1
+		Contact scheduledContact = Linked.searchByAnyTerm(contactName); //n
 		if (scheduledContact == null) { //1
 			System.out.println("Contact was not found"); //1
 			return; //1
@@ -247,7 +247,7 @@ public class Phonebook {
 		case 1: //1
 			System.out.println("Enter the contact's name: "); //1
 			String givenContactName = input.next(); //1
-			Contact ContactE = Linked.searchByAnyTerm(givenContactName); //1
+			Contact ContactE = Linked.searchByAnyTerm(givenContactName); //n
 			if (ContactE != null && !ContactE.HasEvent()) { //1 
 				ContactE.getEvent().printEvent(); //1
 			} else { //1
@@ -257,7 +257,7 @@ public class Phonebook {
 		case 2: //1
 			System.out.println("Enter the event title: "); //1
 			String givenTitle = input.next(); //1
-			Event Eventy = LinkedList.searchBytitle(givenTitle); //1
+			Event Eventy = LinkedList.searchBytitle(givenTitle); //n
 			if (Eventy != null) { //1
 				Eventy.printEvent(); //1
 			} else { //1
