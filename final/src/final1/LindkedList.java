@@ -131,13 +131,13 @@ public class LinkedList {
 				if (current == head) { //n
 					head = head.next; //n
 					if (!current.data.HasEvent()) { //n
-						deleteEvent(current.data.getEvent()); //n
+						deleteEvent(current.data.getEvent()); //n^2
 					}
 					// System.out.println("\n"+head.data+"\n");
 					// If the contact to delete is the first node.
 				} else { //n
 					if (!current.data.HasEvent())  { //n
-						deleteEvent(current.data.getEvent()); //n
+						deleteEvent(current.data.getEvent()); //n^2
 					}
 					// If the contact to delete is not the first node.
 					previous.next = current.next;//n
