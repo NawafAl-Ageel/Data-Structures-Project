@@ -61,30 +61,30 @@ public class LinkedList {
 	}
 
 	public static Contact searchByAnyTerm(String anyTerm) {
-		current = head;
-		while (current != null) {
-			if (current.data.getPhoneNumber().equalsIgnoreCase(anyTerm)
-					|| current.data.getName().equalsIgnoreCase(anyTerm)
+		current = head; //1
+		while (current != null) { //n+1
+			if (current.data.getPhoneNumber().equalsIgnoreCase(anyTerm) 
+					|| current.data.getName().equalsIgnoreCase(anyTerm) 
 					|| current.data.getEmailAddress().equalsIgnoreCase(anyTerm)
 					|| current.data.getAddress().equalsIgnoreCase(anyTerm)
-					|| current.data.getBirthday().equalsIgnoreCase(anyTerm)) {
-				System.out.println("Contact found");
-				return current.data;
+					|| current.data.getBirthday().equalsIgnoreCase(anyTerm)) { //n
+				System.out.println("Contact found"); //1
+				return current.data; //1
 			}
-			current = current.next;
+			current = current.next; //n
 		}
-		return null;
+		return null; //1
 	}
 
 	public void printContactsByFirstName(String firstName) {
-		current = head;
+		current = head; //1
 
-		while (current != null) {
-			String[] firstN = current.data.getName().split(" ");
-			if (firstN[0].equalsIgnoreCase(firstName)) {
-				current.data.printContactInfo();
-			}
-			current = current.next;
+		while (current != null) { //n+1
+			String[] firstN = current.data.getName().split(" "); //n
+			if (firstN[0].equalsIgnoreCase(firstName)) { //n
+				current.data.printContactInfo(); //n
+			} //n
+			current = current.next; //n
 		}
 	}
 
@@ -122,38 +122,38 @@ public class LinkedList {
 	}
 
 	public boolean deleteContact(String name) {
-		previous = null; // Previous node to keep track of the node before the one to delete.
-		current = head; // Start from the first node in the linked list.
+		previous = null; // Previous node to keep track of the node before the one to delete. /1
+		current = head; // Start from the first node in the linked list. /1
 
-		while (current != null) {
-			if (current.data.getName().equalsIgnoreCase(name)) {
+		while (current != null) { //n+1
+			if (current.data.getName().equalsIgnoreCase(name)) { //n
 				// Found the contact to delete.
-				if (current == head) {
-					head = head.next;
-					if (!current.data.HasEvent()) {
-						deleteEvent(current.data.getEvent());
+				if (current == head) { //n
+					head = head.next; //n
+					if (!current.data.HasEvent()) { //n
+						deleteEvent(current.data.getEvent()); //n
 					}
 					// System.out.println("\n"+head.data+"\n");
 					// If the contact to delete is the first node.
-				} else {
-					if (!current.data.HasEvent()) {
-						deleteEvent(current.data.getEvent());
+				} else { //n
+					if (!current.data.HasEvent())  { //n
+						deleteEvent(current.data.getEvent()); //n
 					}
 					// If the contact to delete is not the first node.
-					previous.next = current.next;
+					previous.next = current.next;//n
 				}
-				System.out.println("Contact deleted: " + name);
+				System.out.println("Contact deleted: " + name); //n
 
-				return true;
+				return true; //1
 			}
 
-			previous = current;
-			current = current.next;
+			previous = current; //n
+			current = current.next; //n
 		}
-		return false;
+		return false; //1
 	}
 
-	private void deleteEvent(Event del) {
+	private void deleteEvent(Event del) { 
 		previousE = null; // Previous node to keep track of the node before the one to delete.
 		currentE = headE; // Start from the first node in the linked list.
 
@@ -176,16 +176,16 @@ public class LinkedList {
 	}
 
 	public void PrintAllEvents() {
-		currentE = headE;
-		if (isEmptyE()) {
-			System.out.println("no elements !");
-			return;
-		} else {
-			while (currentE != null) {
-				currentE.data.printEvent();
-				currentE = currentE.next;
+		currentE = headE; //1
+		if (isEmptyE()) { //1
+			System.out.println("no elements !"); //1
+			return; //1
+		} else { //1
+			while (currentE != null) { //n+1
+				currentE.data.printEvent(); //n
+				currentE = currentE.next; //n
 			}
-			System.out.println("Printed!");
+			System.out.println("Printed!"); //1
 		}
 	}
 
