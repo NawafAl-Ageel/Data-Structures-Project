@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.time.*;
 
 public class Phonebook {
-	LocalDateTime localTime;
+	LocalDateTime localTime = LocalDateTime.now();
 	Scanner input;
 	LinkedList Linked;
 
@@ -57,7 +57,11 @@ public class Phonebook {
 				System.out.println("The Phone number must be a number!");  //n+1 
 			}  //n+1 
 
-		} while (givenPhoneNumber.length() != 10 || !isDigit); //n
+			if (!isDigit) { //n+1
+				System.out.println("The Phone number must be a number!");
+			}
+
+		} while (givenPhoneNumber.length() != 10 || !isDigit || (Linked.searchByAnyTerm(givenPhoneNumber)!=null)); //n
 		String givenEmailAddress = null; //1
 
 		do { //n+1
@@ -209,7 +213,7 @@ public class Phonebook {
 			}  //n+1
 
 		} while (month > 12 || dayOfMonth > 31 || hour > 24 || minute > 60 || eventDateAndTime.length() < 16
-				|| localTime.getYear() > year || (localTime.getYear() == year && month < localTime.getDayOfMonth())); //n
+				|| LocalDateTime.of(year, month, dayOfMonth, hour, minute).isBefore(localTime)); //n
 
 		System.out.println("Enter event location: "); //1
 		String eventLocation = input.nextLine(); //1
