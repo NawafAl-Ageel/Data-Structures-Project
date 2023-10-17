@@ -36,7 +36,7 @@ public class Contact implements Comparable<Contact> {
 
     // Compare contacts based on their names
     public int compareTo(Contact other) {
-        return this.name.compareTo(other.name);
+        return this.name.toLowerCase().compareTo(other.name.toLowerCase());
     }
 
     // Method to print contact information
