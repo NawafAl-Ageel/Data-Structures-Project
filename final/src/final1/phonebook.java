@@ -45,7 +45,7 @@ public class Phonebook {
 				continue; // Continue to the next iteration of the loop.  //n+1 
 			}
 
-			for (int i = 0; i < givenPhoneNumber.length(); i++) { n^2+2n+1
+			for (int i = 0; i < givenPhoneNumber.length(); i++) { //n^2+2n+1
 				char c = givenPhoneNumber.charAt(i); //n^2+n
 				if (!Character.isDigit(c)) { //n^2+n
 					isDigit = false; //n^2+n
