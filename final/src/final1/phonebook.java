@@ -180,7 +180,7 @@ public class Phonebook {
 			return; //1
 		} //1
 
-		if(!scheduledContact.HasEvent()) { 1
+		if(!scheduledContact.HasEvent()) { //1
 			System.out.println("Contact already has an event");
 			return;
 		}
@@ -239,7 +239,7 @@ public class Phonebook {
 		do { //n+1
 			System.out.println("Enter search criteria: ");  //n+1
 			System.out.println("1. Contact name: ");  //n+1
-			System.out.println("2. Event title: "); v
+			System.out.println("2. Event title: "); //n+1
 
 			try {  //n+1
 				choice = input.nextInt();  //n+1
