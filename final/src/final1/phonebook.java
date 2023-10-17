@@ -156,7 +156,7 @@ public class Phonebook {
 		System.out.println("Enter the contact's name that you want to delete: ");//1
 		String deletingName = input.nextLine();//1
 
-		if (Linked.deleteContact(deletingName)) { //n
+		if (Linked.deleteContact(deletingName)) { //n^2
 			System.out.println("Contact has been deleted"); //1
 		} else { //1
 			System.out.println("Contact was not found"); //1
