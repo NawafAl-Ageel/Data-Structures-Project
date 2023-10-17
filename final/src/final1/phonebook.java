@@ -273,7 +273,7 @@ public class Phonebook {
 		System.out.println("Enter the first name:"); //1
 		input = new Scanner(System.in); //1
 		String firstName = input.nextLine(); //1
-		Linked.printContactsByFirstName(firstName); //n
+		Linked.printContactsByFirstName(firstName); //n+1
 		System.out.println("finished !"); //1
 	} 
 
