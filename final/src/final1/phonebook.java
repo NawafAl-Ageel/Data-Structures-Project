@@ -17,149 +17,149 @@ public class Phonebook {
 	}
 
 	public void addContact() {
-		input = new Scanner(System.in);
+		input = new Scanner(System.in); //1
 
-		String givenName;
-		boolean containsAlphabets = false;
-		do {
-			System.out.println("Enter the Contact's name: ");
-			givenName = input.nextLine();
-			containsAlphabets = Pattern.matches(".*[a-zA-Z].*", givenName);
-			if (!containsAlphabets) {
-				System.out.println("Name must be a String !");
-			}
-			if (givenName.length() < 4) {
-				System.out.println("Name must be 4 charcters long !");
-			}
-		} while (!containsAlphabets || givenName.length() < 4);
+		String givenName; //1
+		boolean containsAlphabets = false; //1
+		do {  //n+1
+			System.out.println("Enter the Contact's name: "); //n+1 
+			givenName = input.nextLine();  //n+1 
+			containsAlphabets = Pattern.matches(".*[a-zA-Z].*", givenName);  //n+1 
+			if (!containsAlphabets) {  //n+1 
+				System.out.println("Name must be a String !");  //n+1 
+			}  //n+1  
+			if (givenName.length() < 4) {  //n+1 
+				System.out.println("Name must be 4 charcters long !");  //n+1 
+			}  //n+1 
+		} while (!containsAlphabets || givenName.length() < 4); //n
 
-		String givenPhoneNumber = null;
-		boolean isDigit = false;
-		do {
-			isDigit = true;
-			System.out.println("Enter Phone Number: ");
-			givenPhoneNumber = input.nextLine();
+		String givenPhoneNumber = null; //1
+		boolean isDigit = false; //1
+		do {  //n+1 
+			isDigit = true;  //n+1 
+			System.out.println("Enter Phone Number: ");  //n+1 
+			givenPhoneNumber = input.nextLine();  //n+1 
 
-			if (givenPhoneNumber.length() != 10) {
-				System.out.println("Number must be of length 10!");
-				continue; // Continue to the next iteration of the loop.
-			}
-
-			for (int i = 0; i < givenPhoneNumber.length(); i++) {
-				char c = givenPhoneNumber.charAt(i);
-				if (!Character.isDigit(c)) {
-					isDigit = false;
-					break; // Exit the loop if a non-digit character is found.
-				}
+			if (givenPhoneNumber.length() != 10) {  //n+1 
+				System.out.println("Number must be of length 10!");  //n+1 
+				continue; // Continue to the next iteration of the loop.  //n+1 
 			}
 
-			if (!isDigit) {
-				System.out.println("The Phone number must be a number!");
+			for (int i = 0; i < givenPhoneNumber.length(); i++) { n^2+2n+1
+				char c = givenPhoneNumber.charAt(i); //n^2+n
+				if (!Character.isDigit(c)) { //n^2+n
+					isDigit = false; //n^2+n
+					break; // Exit the loop if a non-digit character is found. //n^2+n
+				} //n^2+n
 			}
 
-		} while (givenPhoneNumber.length() != 10 || !isDigit);
-		String givenEmailAddress = null;
+			if (!isDigit) {   //n+1 
+				System.out.println("The Phone number must be a number!");  //n+1 
+			}  //n+1 
 
-		do {
-			System.out.println("Enter Email Address: ");
-			givenEmailAddress = input.nextLine();
-			if(!givenEmailAddress.contains("@") || !givenEmailAddress.contains(".") || givenEmailAddress.length() < 7)
-				System.out.println("incorrect Email Adress Format!");
-		} while (!givenEmailAddress.contains("@") || !givenEmailAddress.contains(".") || givenEmailAddress.length() < 7);
-		System.out.println("Enter Address: ");
-		String givenAddress = input.nextLine();
+		} while (givenPhoneNumber.length() != 10 || !isDigit); //n
+		String givenEmailAddress = null; //1
 
-		String givenBirthday = null;
-		do {
-			System.out.println("Enter Birthday:(MM/DD/YYYY)");
-			givenBirthday = input.nextLine();
-			if (givenBirthday.length() < 10 || !givenBirthday.contains("/"))
-				System.out.println("Birthday must be with the format (MM/DD/YYYY)");
-		} while (givenBirthday.length() < 10 || !givenBirthday.contains("/"));
+		do { //n+1
+			System.out.println("Enter Email Address: "); //n+1
+			givenEmailAddress = input.nextLine(); //n+1
+			if(!givenEmailAddress.contains("@") || !givenEmailAddress.contains(".") || givenEmailAddress.length() < 7) //n+1
+				System.out.println("incorrect Email Adress Format!"); //n+1
+		} while (!givenEmailAddress.contains("@") || !givenEmailAddress.contains(".") || givenEmailAddress.length() < 7); //n
+		System.out.println("Enter Address: "); //1
+		String givenAddress = input.nextLine(); //1
 
-		System.out.println("Enter notes: ");
-		String givenNotes = input.nextLine();
+		String givenBirthday = null; //1
+		do { //n+1
+			System.out.println("Enter Birthday:(MM/DD/YYYY)");  //n+1
+			givenBirthday = input.nextLine();  //n+1
+			if (givenBirthday.length() < 10 || !givenBirthday.contains("/"))  //n+1
+				System.out.println("Birthday must be with the format (MM/DD/YYYY)");  //n+1
+		} while (givenBirthday.length() < 10 || !givenBirthday.contains("/")); //n
+
+		System.out.println("Enter notes: ");  //1
+		String givenNotes = input.nextLine(); //1
 		Contact contact = new Contact(givenName, givenPhoneNumber, givenEmailAddress, givenAddress, givenBirthday,
-				givenNotes);
-		if (Linked.addContact(contact))
-			System.out.println("Contact added successfully!");
-		System.out.println();
+				givenNotes); //1
+		if (Linked.addContact(contact)) //1
+			System.out.println("Contact added successfully!"); //1
+		System.out.println(); //1
 
 	}
 
-	public void searchContact() {
-		input = new Scanner(System.in);
-		String searchedCriteria = null;
-		int choice = 0;
-		do {
-			System.out.println("Enter search criteria: ");
-			System.out.println("1. Name");
-			System.out.println("2. Phone Number");
-			System.out.println("3. Email Address");
-			System.out.println("4. Address");
-			System.out.println("5. Birthday");
-			try {
-				choice = input.nextInt();
-			} catch (Exception erorr) {
-				System.out.println("Sorry but you have to choose between these criterias !");
-				input.nextLine();
-			}
-		} while (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5);
+	public void searchContact() {  //1
+		input = new Scanner(System.in); //1 
+		String searchedCriteria = null; //1
+		int choice = 0; //1
+		do { //n+1
+			System.out.println("Enter search criteria: "); //n+1
+			System.out.println("1. Name"); //n+1
+			System.out.println("2. Phone Number"); //n+1
+			System.out.println("3. Email Address"); //n+1
+			System.out.println("4. Address"); //n+1
+			System.out.println("5. Birthday"); //n+1
+			try { //n+1
+				choice = input.nextInt(); //n+1
+			} catch (Exception erorr) { //n+1
+				System.out.println("Sorry but you have to choose between these criterias !"); //n+1
+				input.nextLine(); //n+1
+			} //n+1
+		} while (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5); //n
 
-		switch (choice) {
-		case 1:
-			System.out.println("Enter the Contact's name: ");
-			searchedCriteria = input.next();
-			break;
-		case 2:
-			System.out.println("Enter Phone Number: ");
-			searchedCriteria = input.next();
-			break;
-		case 3:
-			System.out.println("Enter Email Address: ");
-			searchedCriteria = input.next();
-			break;
-		case 4:
-			System.out.println("Enter Address: ");
-			searchedCriteria = input.next();
-			break;
-		case 5:
-			System.out.println("Enter Birthday:");
-			searchedCriteria = input.next();
-			break;
-		}
-		Contact searchedContact = Linked.searchByAnyTerm(searchedCriteria);
-		if (searchedContact != null) {
-			searchedContact.printContactInfo();
-		} else {
-			System.out.println("Unfound Contact !");
-		}
-		input.nextLine();
-	}
+		switch (choice) { //1
+		case 1: //1
+			System.out.println("Enter the Contact's name: "); //1
+			searchedCriteria = input.next(); //1
+			break; //1
+		case 2: //1
+			System.out.println("Enter Phone Number: "); //1
+			searchedCriteria = input.next(); //1
+			break; //1
+		case 3: //1
+			System.out.println("Enter Email Address: "); //1
+			searchedCriteria = input.next(); //1
+			break; //1
+		case 4: //1
+			System.out.println("Enter Address: "); //1
+			searchedCriteria = input.next(); //1
+			break; //1
+		case 5: //1
+			System.out.println("Enter Birthday:"); //1
+			searchedCriteria = input.next(); //1
+			break; //1
+		} //1
+		Contact searchedContact = Linked.searchByAnyTerm(searchedCriteria); //1
+		if (searchedContact != null) { //1
+			searchedContact.printContactInfo(); //1
+		} else { //1
+			System.out.println("Unfound Contact !"); //1
+		} //1
+		input.nextLine(); //1
+	} //1
 
-	private static int[] splitDateTime(String dateTimeStr) {
-		String[] parts = dateTimeStr.split(" ");
-		String[] dateParts = parts[0].split("/");
-		String[] timeParts = parts[1].split(":");
+	private static int[] splitDateTime(String dateTimeStr) { 
+		String[] parts = dateTimeStr.split(" "); //1
+		String[] dateParts = parts[0].split("/"); //1
+		String[] timeParts = parts[1].split(":"); //1
 
-		int year = Integer.parseInt(dateParts[2]);
-		int month = Integer.parseInt(dateParts[0]);
-		int day = Integer.parseInt(dateParts[1]);
-		int hour = Integer.parseInt(timeParts[0]);
-		int minutes = Integer.parseInt(timeParts[1]);
+		int year = Integer.parseInt(dateParts[2]); //1
+		int month = Integer.parseInt(dateParts[0]); //1
+		int day = Integer.parseInt(dateParts[1]); //1
+		int hour = Integer.parseInt(timeParts[0]); //1
+		int minutes = Integer.parseInt(timeParts[1]); //1
 
-		return new int[] { year, month, day, hour, minutes };
+		return new int[] { year, month, day, hour, minutes }; //1
 	}
 
 	public void deleteContact() {
-		input = new Scanner(System.in);
-		System.out.println("Enter the contact's name that you want to delete: ");
-		String deletingName = input.nextLine();
+		input = new Scanner(System.in); //1
+		System.out.println("Enter the contact's name that you want to delete: ");//1
+		String deletingName = input.nextLine();//1
 
-		if (Linked.deleteContact(deletingName)) {
-			System.out.println("Contact has been deleted");
-		} else {
-			System.out.println("Contact was not found");
+		if (Linked.deleteContact(deletingName)) { //1
+			System.out.println("Contact has been deleted"); //1
+		} else { 
+			System.out.println("Contact was not found"); 
 		}
 	}
 
