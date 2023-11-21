@@ -169,9 +169,9 @@ public class Phonebook {
 		} //1
 	}
 
-	public void scheduleEvent() {
+	public void scheduleAppointment() {
 		Scanner input = new Scanner(System.in); //1
-		System.out.println("Enter event title: "); //1
+		System.out.println("Enter appointment title: "); //1
 		String eventTitle = input.nextLine(); //1
 
 		System.out.println("Enter contact name: "); //1
@@ -184,7 +184,7 @@ public class Phonebook {
 		} //1
 
 		if(!scheduledContact.HasEvent()) { //1
-			System.out.println("Contact already has an event");
+			System.out.println("Contact already has an appointment");
 			return;
 		}
 
@@ -198,12 +198,12 @@ public class Phonebook {
 		do { //n+1
 			try { //n+1
 				do {  //n^2+2n+1
-					System.out.println("Enter event date and time (MM/DD/YYYY HH:MM)"); //n^2+2n+1
+					System.out.println("Enter appointment date and time (MM/DD/YYYY HH:MM)"); //n^2+2n+1
 					eventDateAndTime = input.nextLine();  //n^2+2n+1
 
 					if (eventDateAndTime.length() < 16 || !eventDateAndTime.contains("/")  
 							|| !eventDateAndTime.contains(":"))  //n^2+2n+1
-						System.out.println("Event date and time must be with the format (MM/DD/YY HH:MM)");  //n^2+2n+1
+						System.out.println("appointment date and time must be with the format (MM/DD/YY HH:MM)");  //n^2+2n+1
 				} while (eventDateAndTime.length() < 16 || !eventDateAndTime.contains("/")
 						|| !eventDateAndTime.contains(":")); //n^2 +n
 
@@ -222,17 +222,17 @@ public class Phonebook {
 		} while (month > 12 || dayOfMonth > 31 || hour > 24 || minute > 60 || eventDateAndTime.length() < 16
 				|| LocalDateTime.of(year, month, dayOfMonth, hour, minute).isBefore(localTime)); //n
 
-		System.out.println("Enter event location: "); //1
+		System.out.println("Enter appointment location: "); //1
 		String eventLocation = input.nextLine(); //1
 
 		Event event = new Event(eventTitle, contactName, year, month, dayOfMonth, hour, minute, eventLocation); //1
 		
 		if (Linked.addEvent(event)) { //1
 	        scheduledContact.addEvent(event); //1
-	        System.out.println("Event has been scheduled!"); //1	    
+	        System.out.println("Appointment has been scheduled!"); //1	    
 		} //1
 		else //1
-	        System.out.println("There might be a conflict with another event at the same time"); //1
+	        System.out.println("There might be a conflict with another event/appointment at the same time"); //1
 	} //1
 
 	public void printEventDetails() { 
@@ -303,7 +303,7 @@ public class Phonebook {
 			System.out.println("1. Add a contact");
 			System.out.println("2. Search for a contact");
 			System.out.println("3. Delete a contact");
-			System.out.println("4. Schedule an event");
+			System.out.println("4. Schedule an event/appointment");
 			System.out.println("5. Print event details");
 			System.out.println("6. Print contacts by first name");
 			System.out.println("7. Print all events alphabetically");
@@ -326,7 +326,18 @@ public class Phonebook {
 				deleteContact();
 				break;
 			case 4:
-				scheduleEvent();
+				System.out.println("Enter type:");
+				System.out.println("1. event");
+				System.out.println("2. appointment");
+				int type = input.nextInt();
+				switch(type) {
+				case 1:
+					scheduleEvent();
+					break;
+				case 2:
+					scheduleAppointment();
+					break;
+				}
 				break;
 			case 5:
 				printEventDetails();
@@ -349,4 +360,3 @@ public class Phonebook {
 		Phonebook app = new Phonebook();
 		app.runPhoneBook();
 	}
-}
