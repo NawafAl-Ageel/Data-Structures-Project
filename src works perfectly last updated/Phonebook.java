@@ -284,9 +284,6 @@ public class Phonebook {
 	            }
 	        	
 	        }
-	        else {
-	            System.out.println("Contact already has an event");
-	        }
 
 	        System.out.println("Do you want to add more contacts? (1. Yes / 2. No)");
 	        int choice = input.nextInt();
