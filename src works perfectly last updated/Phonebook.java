@@ -32,6 +32,9 @@ public class Phonebook {
 			if (givenName.length() < 4) {  //n+1 
 				System.out.println("Name must be 4 charcters long !");  //n+1 
 			}  //n+1 
+			if(bst.searchByAnyTerm(givenName)!=null) {
+				System.out.println("The Name is already exist !");
+			}
 			
 		} while (!containsAlphabets || givenName.length() < 4 || bst.searchByAnyTerm(givenName)!=null ); //newww
 
@@ -85,8 +88,9 @@ public class Phonebook {
 		String givenNotes = input.nextLine(); //1
 		Contact contact = new Contact(givenName, givenPhoneNumber, givenEmailAddress, givenAddress, givenBirthday,
 				givenNotes); //1
-		if (bst.insertContact(contact)) //1
+		if (bst.insertContact(contact)) { //1
 			System.out.println("Contact added successfully!"); //1
+		}
 		System.out.println(); //1
 
 	}
@@ -243,7 +247,7 @@ public class Phonebook {
 	    System.out.println("Enter event title: ");
 	    String eventTitle = input.nextLine();
 
-	    Contact[] contacts = new Contact[10];  // Assuming no event can have more than 10 contacts
+	    Contact[] contacts = new Contact[20];  // Assuming no event can have more than 10 contacts
 	    int contactsCount = 0;
 
 	    boolean addMoreContacts;
@@ -255,14 +259,32 @@ public class Phonebook {
 	        Contact scheduledContact = bst.searchByAnyTerm(contactName);
 	        if (scheduledContact == null) {
 	            System.out.println("Contact was not found");
-	        } else if (scheduledContact.HasEvent()) {
-	            contacts[contactsCount++] = scheduledContact;
-
-	            if (contactsCount >= 10) {
-	                System.out.println("Maximum number of contacts reached (10).");
+	        }
+	        else if (!scheduledContact.HasEvent()) {
+	        	System.out.println("Contact already has an Event");
+	            
+	        }
+	          
+	       
+	        else if (scheduledContact.HasEvent()) {
+	        	 boolean b=false;
+	        	for(int i=0;i<contacts.length;i++) {
+	        		if(contacts[i]!=null &&scheduledContact.getName().equalsIgnoreCase(contacts[i].getName())) {
+	        			System.out.println("The Contact is in The Event !");
+	        			b=true;
+	        			break;
+	        		}
+	        	}
+	        	if(!b) {
+	        		contacts[contactsCount++] = scheduledContact;
+	        	}
+	        	if (contactsCount >= 20) {
+	                System.out.println("Maximum number of contacts reached (20).");
 	                break;
 	            }
-	        } else {
+	        	
+	        }
+	        else {
 	            System.out.println("Contact already has an event");
 	        }
 
@@ -367,6 +389,7 @@ public class Phonebook {
 	}
 
 	public void printContactsByFirstName() { 
+		
 		System.out.println("Enter the first name:"); //1
 		input = new Scanner(System.in); //1
 		String firstName = input.nextLine(); //1
