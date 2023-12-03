@@ -73,6 +73,7 @@ public class ContactBST {
 	private boolean insert(int k, Contact val) {
 		if (empty()) {
 			root = new BSTNode(val.contactKey, val);
+			return true;
 		}
 		BSTNode p, q = current;
 
@@ -192,12 +193,12 @@ public class ContactBST {
     }
 
     private static boolean contactContainsTerm(Contact contact, String term) {
-        return contact.getName().toLowerCase().contains(term.toLowerCase()) ||
-                contact.getPhoneNumber().toLowerCase().contains(term.toLowerCase()) ||
-                contact.getEmailAddress().toLowerCase().contains(term.toLowerCase()) ||
-                contact.getAddress().toLowerCase().contains(term.toLowerCase()) ||
-                contact.getBirthday().toLowerCase().contains(term.toLowerCase()) ||
-                contact.getNotes().toLowerCase().contains(term.toLowerCase());
+        return contact.getName().toLowerCase().equalsIgnoreCase(term.toLowerCase()) ||
+                contact.getPhoneNumber().toLowerCase().equalsIgnoreCase(term.toLowerCase()) ||
+                contact.getEmailAddress().toLowerCase().equalsIgnoreCase(term.toLowerCase()) ||
+                contact.getAddress().toLowerCase().equalsIgnoreCase(term.toLowerCase()) ||
+                contact.getBirthday().toLowerCase().equalsIgnoreCase(term.toLowerCase()) ||
+                contact.getNotes().toLowerCase().equalsIgnoreCase(term.toLowerCase());
     }
 
 ///////////////////////////// chat GPT made ////////////////////////////////////	
